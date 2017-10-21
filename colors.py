@@ -24,3 +24,7 @@ purpleBlueGreen='PuBuGn'
 blueGreen='BlueGreen'
 yellowGreen='YlGn'
 
+colorList = [virdis, plasma, inferno, magma, greys, purples, blues, greens, oranges, reds, yellowOrangeBrown,
+             yellowOrangeRed, orangeRed, purpleRed, redPurple, bluePurple, greenBlue, yellowGreenBlue, purpleBlueGreen,
+             blueGreen, yellowGreen]
+
