@@ -285,18 +285,4 @@ def locateEPW(addressString=None,longitude=None,latitude=None,searchRadius=50,se
     return weatherDatalist[:numberOfResults]
 
 
-x = locateEPW('Athens Greece')
 
-from randomCity import returnRandomCity
-
-x = returnRandomCity()
-print(x)
-#
-# from randomCity import returnRandomCity
-#
-# with open('__epwLocations/largeCities.csv') as largeCity:
-#     for idx,lines in enumerate(largeCity):
-#             if lines.strip():
-#                 city = lines.strip()
-#                 for val in locateEPW(city,numberOfResults=1):
-#                     print(val)
