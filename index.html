@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ladybug Vizzz!</title>
+  <meta name="description" content="ladybug vizz home page" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+  <style>
+    #controls p{
+      float:left;
+      padding: 15px;
+    }
+  </style>
+
+</head>
+
+<body>
+<section id="controls">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="section-title">
+                    Ladybug Vizz!
+                </h1>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <id="form" aaction="submit" method="post">
+
+                  <p><strong>Location</strong><br>
+                  <input id="element_0" name="element_0" value="" size="50" type="text" />
+                  <input  id="searchEPW" value="Submit" type="submit" style="width:100px; background:white; color: black;"/>
+                  </p>
+
+                  <p><strong>Data Type</strong><br>
+                  <select id="element_1" name="element_1" style="width:200px;">
+                  <option value="dryBulbTemperature">Dry Bulb Temperature</option>
+                  <option value="dewPointTemperature">Dew Point Temperature</option>
+                  <option value="relativeHumidity">Relative Humidity</option>
+                  <option value="windSpeed">Wind Speed</option>
+                  <option value="globalHorizontalRadiation">Global Horizontal Radiation</option>
+                  <option value="directNormalRadiation">Direct Normal Radiation</option>
+                  <option value="diffuseHorizontalRadiation">Diffuse Horizontal Radiation</option>
+                  <option value="horizontalInfraredRadiationIntensity">Horizontal Infrared Radiation</option>
+                  <option value="globalHorizontalIlluminance">Global Horizontal Illuminance</option>
+                  <option value="directNormalIlluminance">Direct Normal Illuminance</option>
+                  <option value="diffuseHorizontalIlluminance">Diffuse Horizontal Illuminance</option>
+                  </select>
+                  </p>
+
+
+                  <p><strong>Color Scheme</strong><br>
+                  <select id="element_1" name="element_1" style="width:200px;">
+                  <option value="virdis">Virdis</option>
+                  <option value="plasma">Plasma</option>
+                  <option value="inferno">Inferno</option>
+                  <option value="magma">Magma</option>
+                  <option value="Greys">Greys</option>
+                  <option value="Purples">Purples</option>
+                  <option value="Blues">Blues</option>
+                  <option value="Greens">Greens</option>
+                  <option value="Oranges">Oranges</option>
+                  <option value="Reds">Reds</option>
+                  <option value="YlOrBr">Yellow Or Brown</option>
+
+                  </select>
+                  </p>
+                </form>
+            </div>
+        </div>
+    </div>

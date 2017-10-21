@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 
-virdis='virdis'
+
 plasma='plasma'
 inferno='inferno'
 magma='magma'
@@ -14,13 +14,17 @@ reds='Reds'
 yellowOrangeBrown='YlOrBr'
 yellowOrangeRed='YlOrRd'
 orangeRed='OrRd'
-purpleRed='purpleRed'
+purpleRed='PuRd'
 redPurple='RdPu'
 bluePurple='BuPu'
 greenBlue='GnBu'
 purpleBlue='PuBu'
 yellowGreenBlue='YlGnBu'
 purpleBlueGreen='PuBuGn'
-blueGreen='BlueGreen'
+blueGreen='BuGn'
 yellowGreen='YlGn'
+
+colorList=[plasma, inferno, magma, greys, purples, blues, greens, oranges, reds, yellowOrangeBrown,
+             yellowOrangeRed, orangeRed, purpleRed, redPurple, bluePurple, greenBlue, yellowGreenBlue, purpleBlueGreen,
+             blueGreen, yellowGreen]
 

@@ -204,7 +204,6 @@ class ClimateData(object):
         return self.__getDataFile('clm',downloadPath=downloadPath)
 
 
-
 locationValueTuple= namedtuple('locationValue',['locationName','dataSource','country','climateDataClass','distance'])
 
 def locateEPW(addressString=None,longitude=None,latitude=None,searchRadius=50,searchMultiplier=5,recursionLimit=5,
@@ -285,18 +284,19 @@ def locateEPW(addressString=None,longitude=None,latitude=None,searchRadius=50,se
     return weatherDatalist[:numberOfResults]
 
 
-x = locateEPW('Athens Greece')
+if __name__ == "__main__":
+    #Search for a location
+    x = locateEPW('Helsinki Finland')
 
-from randomCity import returnRandomCity
+    #isolate the first result.
+    res1 = x[0]
 
-x = returnRandomCity()
-print(x)
-#
-# from randomCity import returnRandomCity
-#
-# with open('__epwLocations/largeCities.csv') as largeCity:
-#     for idx,lines in enumerate(largeCity):
-#             if lines.strip():
-#                 city = lines.strip()
-#                 for val in locateEPW(city,numberOfResults=1):
-#                     print(val)
+    #Get the climate data class.
+    climData = res1.climateDataClass
+
+    #download the climate data
+    downloadLocation = climData.download('test')
+
+    #get epwFile
+    epwFile = climData.getEpwFile('test')
+    print(epwFile)
