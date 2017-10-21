@@ -32,3 +32,16 @@ def extractEPWdataset(climateDataClass,fileDownloadDirectory=None):
 
     return dataDict
 
+if __name__ =="__main__":
+    from __locateEPW import locateEPW
+    x = locateEPW('Djakarta Indonesia')
+    #isolate the first result.
+    res1 = x[0]
+
+    #Get the climate data class.
+    climData = res1.climateDataClass
+
+    #Get weather data
+    weatherDataDict = extractEPWdataset(climData)
+
+    print(weatherDataDict['windSpeed'])
