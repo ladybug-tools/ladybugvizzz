@@ -1,8 +1,10 @@
 """
 LadybugVizz | Wind rose chart
 """
-
 from __future__ import division
+import matplotlib
+matplotlib.use('Qt4Agg')
+
 from __locateEPW import locateEPW
 from ladybug.epw import EPW
 x = locateEPW('Manhattan')

@@ -28,8 +28,10 @@ def extractEPWdataset(climateDataClass,fileDownloadDirectory=None):
     dataDict['globalHorizontalIlluminance']=list(epwObj.globalHorizontalIlluminance)
     dataDict['directNormalIlluminance'] = list(epwObj.directNormalIlluminance)
     dataDict['diffuseHorizontalIlluminance'] = list(epwObj.diffuseHorizontalIlluminance)
-
-
+    dataDict['longitude']=epwObj.location.longitude
+    dataDict['latitude'] = epwObj.location.latitude
+    dataDict['meridian'] = epwObj.location.meridian
+    dataDict['timezone'] = epwObj.location.timezone
     return dataDict
 
 if __name__ =="__main__":
