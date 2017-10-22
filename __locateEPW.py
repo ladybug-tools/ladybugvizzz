@@ -283,6 +283,20 @@ def locateEPW(addressString=None,longitude=None,latitude=None,searchRadius=50,se
 
     return weatherDatalist[:numberOfResults]
 
+def locateByAddress(addressString):
+        geolocator = Nominatim()
+        location = geolocator.geocode(addressString,timeout=10)
+        try:
+            latitude,longitude=location.latitude,location.longitude
+            latStr = 'N' if location.latitude>0 else 'S'
+            longStr = 'E' if location.longitude>0 else 'W'
+            logger.debug("Location identified as %s at %s %s, %s %s"%(location.address,location.latitude,
+                                                                      latStr,location.longitude,longStr))
+        except AttributeError:
+            raise Exception("No geographical locations were identified for %s. A more specific search"
+                            " with zipcodes and similar identifying information will be more helpful."%addressString)
+
+        return location.address,location.longitude,location.latitude
 
 if __name__ == "__main__":
     #Search for a location
