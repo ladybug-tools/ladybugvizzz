@@ -11,11 +11,15 @@ import os
 
 
 # Import Ladybug
-rootDir = '\\'.join(os.getcwd().split('\\')[0:-2])
+
+rootDir = os.getcwd()
 import sys
-sys.path.append(rootDir)
+sys.path.append(os.path.join(rootDir,'vizzz','assets'))
 import ladybug
 import getWeatherData
+import __locateEPW
+import locationCalc
+import __extractEPW
 
 # Create your views here.
 def index(request):
@@ -26,9 +30,8 @@ def index(request):
     :return:
     """
     cityList = []
-    rootDir2 = '\\'.join(os.getcwd().split('\\')[0:-2])
-    print rootDir2
-    file_path = rootDir2 + '\__epwLocations\largeCities.csv'
+    rootDir = os.getcwd()
+    file_path = rootDir + '\\vizzz\\assets\__epwLocations\largeCities.csv'
     with open(file_path, 'r') as cityData:
         for lines in cityData:
             if lines.strip():
@@ -36,8 +39,8 @@ def index(request):
 
     randomCity = str(random.choice(cityList))
     cityData = getWeatherData.returnWeatherDataDict(randomCity)
-    print cityData
 
     city = '<h1>' + randomCity + "</h1>"
+    city = city + str(cityData)
 
     return HttpResponse(city)
