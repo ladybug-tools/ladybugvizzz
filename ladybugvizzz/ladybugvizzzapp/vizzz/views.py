@@ -20,7 +20,7 @@ import sys
 sys.path.append(rootDir)
 import ladybug
 import getWeatherData
-import windrose
+import __windrose
 
 
 # Create your views here.
@@ -36,7 +36,7 @@ class HomePageView(TemplateView):
         print "Submitted city: " + cityname
         form = CityForm(request.POST)
         imgPath = os.getcwd() + '\\vizzz\\static\\windrose.png'
-        windRose = windrose.returnWindRose(imgPath, cityname)
+        windRose = __windrose.returnWindRose(imgPath, cityname)
         relpath = '\\static\\windrose.png'
         #cityPicUrl = getWeatherData.returnWeatherDataDict(cityname)
         return render(request, 'index.html', {'form': form, 'cityPicUrl': relpath})
