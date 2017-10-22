@@ -106,7 +106,7 @@ class Ui_MainWindow(object):
         self.tbSunPath = QtGui.QWidget()
         self.tbSunPath.setObjectName(_fromUtf8("tbSunPath"))
         self.labelSunpath = QtGui.QLabel(self.tbSunPath)
-        self.labelSunpath.setGeometry(QtCore.QRect(370, 10, 741, 641))
+        self.labelSunpath.setGeometry(QtCore.QRect(10, 0, 711, 641))
         self.labelSunpath.setText(_fromUtf8(""))
         self.labelSunpath.setObjectName(_fromUtf8("labelSunpath"))
         self.tabWidget.addTab(self.tbSunPath, _fromUtf8(""))
@@ -126,7 +126,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QObject.connect(self.actionExit, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

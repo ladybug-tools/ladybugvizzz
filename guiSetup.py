@@ -4,6 +4,7 @@ from __future__ import print_function
 import sys
 from PyQt4 import QtGui
 from PyQt4.QtCore import QUrl
+from PIL import Image
 from gui.gui import Ui_MainWindow
 from __locateEPW import locateEPW,locateByAddress
 from getWeatherData import returnWeatherDataDict
@@ -89,10 +90,16 @@ class Base(QtGui.QMainWindow,Ui_MainWindow):
         self.lblWindrose.setScaledContents(True)
 
         z = returnSunPath(weatherDataDict=weatherDataDict,filepath='sunpath.png')
-        x = QtGui.QPixmap('sunpath.png')
-        self.labelSunpath.setPixmap(x)
-        self.labelSunpath.setScaledContents(True)
+        x = Image.open('sunpath.png')
+        y = Image.open('background.png').convert('RGBA')
 
+        l = Image.alpha_composite(y, x).save("composite.png")
+
+        self.labelSunpath.setPixmap(QtGui.QPixmap("composite.png"))
+        self.labelSunpath.setScaledContents(True)
+        # k = QtGui.QPixmap('background.png')
+        # self.labelSunpath.setPixmap(k)
+        self.labelSunpath.setScaledContents(True)
         self.createHeatMap()
 
     def createHeatMap(self):
