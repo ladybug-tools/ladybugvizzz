@@ -5,6 +5,8 @@ import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 from getWeatherData import returnWeatherDataDict
+import ladybug.sunpath as sp
+import ladybug.analysisperiod as prd
 
 def returnWindRose(weatherDataDict,divisions=None,filepath='windrose.png'):
     """
@@ -180,6 +182,7 @@ def returnWindRose(weatherDataDict,divisions=None,filepath='windrose.png'):
     fig.set_size_inches(8,6)
     fig.savefig(filepath)
     fig.clf()
+    plt.clf()
     return filepath
 
 def returnHeatMap(weatherDataDict,filepath,dataType,dataLabel,colormap='plasma'):
@@ -204,6 +207,7 @@ def returnHeatMap(weatherDataDict,filepath,dataType,dataLabel,colormap='plasma')
     fig.set_size_inches(8,4)
     fig.savefig(filepath)
     fig.clf()
+    plt.clf()
     return filepath
 
 def returnSunPath(weatherDataDict,colormap='plasma',filepath='sunpath.png',backgroundPath='background.png'):
@@ -373,7 +377,7 @@ def returnSunPath(weatherDataDict,colormap='plasma',filepath='sunpath.png',backg
     colors3 = Y3
 
     # start generating the plot
-    fig, ax = plt.subplots()
+    ax = plt.subplot()
 
     # plot 1st graph with sun positions and curves for sunPath and anallema.
     ax.scatter(Y1, X1, c=colors1, cmap=colormap, alpha=1)
@@ -413,21 +417,13 @@ def returnSunPath(weatherDataDict,colormap='plasma',filepath='sunpath.png',backg
     ax.set(aspect=1)
     ax.axis('off')
 
-    # plot second graph for background image, hiding axes and grid.
-    figB, bx = plt.subplots()
-    bx = plt.subplot(111, projection='polar')
-    thetaB = np.linspace(0, 2 * np.pi, 1)
-    r = np.sqrt(1)
-    bx.plot(r * np.cos(thetaB), r * np.sin(thetaB))
-    bx.set_theta_zero_location("N")
-    bx.set_theta_direction(-1)
-    plt.xticks(np.radians(range(0, 360, 45)),
-               ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'])
-    bx.grid(False)
-    bx.axes.get_yaxis().set_visible(False)
 
-    # general properties for the image saving
-    fig.set_size_inches(8, 8)
-    fig.savefig(filepath, dpi=300, transparent=True)
-    figB.set_size_inches(8, 8)
-    figB.savefig(backgroundPath, dpi=300)
+    #general properties for the image saving
+    fig1 = matplotlib.pyplot.gcf()
+    fig1.set_size_inches(8, 8)
+    fig1.savefig(filepath, dpi=300, transparent=True)
+
+
+    fig1.clf()
+    plt.clf()
+    return filepath

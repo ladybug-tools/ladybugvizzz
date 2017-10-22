@@ -31,9 +31,13 @@
                       <input type="Submit" value="Update">
                       <br>
                       <p> {{ location }} </p>
-                      <img src="{{ heatPicUrl }}" width="90%">
-                      <img src="{{ windPicUrl }}" width="50%">
-                      <iframe src="{{ mapHTML }}" width="100%" height="600px" style="border:0px;position:relative;"></div>
+                      <img src="{{ heatPicUrl }}" class="w-100">
+                      <img src="{{ windPicUrl }}" class="w-100">
+                      <div style="display:inline-block;height:800px">
+                      <img src="{{ sunBackPicUrl }}" width="800px" style="margin-left:150px;position:absolute;">
+                      <img src="{{ sunPicUrl }}" width="800px"style="margin-left:150px;position:absolute;">
+                      </div>
+                      <iframe src="{{ mapHTML }}" class="w-100" height="600px" style="border:0px;position:relative;"></div>
 
                   </form>
                 </div>
