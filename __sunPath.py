@@ -3,7 +3,7 @@ LadybugVizz | Wind rose chart
 """
 from __future__ import division
 import matplotlib
-matplotlib.use('Qt4Agg')
+#matplotlib.use('Qt4Agg')
 
 from __locateEPW import locateEPW
 from ladybug.epw import EPW
@@ -195,7 +195,7 @@ colors3 = Y3
 
 
 # start generating the plot
-fig, ax = plt.subplots()
+ax = plt.subplot()
 
 
 # plot 1st graph with sun positions and curves for sunPath and anallema.
@@ -238,24 +238,24 @@ ax.axis('off')
 
 
 # plot second graph for background image, hiding axes and grid.
-figB, bx = plt.subplots()
-bx = plt.subplot(111, projection='polar')
-thetaB = np.linspace(0, 2*np.pi, 1)
-r = np.sqrt(1)
-bx.plot(r*np.cos(thetaB), r*np.sin(thetaB))
-bx.set_theta_zero_location("N")
-bx.set_theta_direction(-1)
-plt.xticks(np.radians(range(0, 360, 45)),
-                   ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'])
-bx.grid(False)
-bx.axes.get_yaxis().set_visible(False)
-
+# figB, bx = plt.subplots()
+# bx = plt.subplot(111, projection='polar')
+# thetaB = np.linspace(0, 2*np.pi, 1)
+# r = np.sqrt(1)
+# bx.plot(r*np.cos(thetaB), r*np.sin(thetaB))
+# bx.set_theta_zero_location("N")
+# bx.set_theta_direction(-1)
+# plt.xticks(np.radians(range(0, 360, 45)),
+#                    ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'])
+# bx.grid(False)
+# bx.axes.get_yaxis().set_visible(False)
+# figB.set_size_inches(8,8)
+# figB.savefig('background.png',dpi=300)
 
 # general properties for the image saving
+fig = matplotlib.pyplot.gcf()
 fig.set_size_inches(8,8)
-fig.savefig('test.png',dpi=300, transparent=True)
-figB.set_size_inches(8,8)
-figB.savefig('background.png',dpi=300)
+#fig.savefig('test.png',dpi=300, transparent=True)
 
 
-#plt.show()
+plt.show()
