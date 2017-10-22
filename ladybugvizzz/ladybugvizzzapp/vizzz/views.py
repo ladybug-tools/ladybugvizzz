@@ -1,11 +1,21 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+# Import Django libraries
 from django.shortcuts import render
 from django.http import HttpResponse
 
-
+# Import python modules
 import random
+import os
+
+
+# Import Ladybug
+rootDir = '\\'.join(os.getcwd().split('\\')[0:-2])
+import sys
+sys.path.append(rootDir)
+import ladybug
+import getWeatherData
 
 # Create your views here.
 def index(request):
@@ -16,13 +26,18 @@ def index(request):
     :return:
     """
     cityList = []
-
-    file_path = 'C:\projects\hello\helloapp\howdy\__epwLocations\largeCities.csv'
+    rootDir2 = '\\'.join(os.getcwd().split('\\')[0:-2])
+    print rootDir2
+    file_path = rootDir2 + '\__epwLocations\largeCities.csv'
     with open(file_path, 'r') as cityData:
         for lines in cityData:
             if lines.strip():
                 cityList.append(lines.strip())
 
-    city = '<h1>' + str(random.choice(cityList)) + "</h1>"
+    randomCity = str(random.choice(cityList))
+    cityData = getWeatherData.returnWeatherDataDict(randomCity)
+    print cityData
+
+    city = '<h1>' + randomCity + "</h1>"
 
     return HttpResponse(city)
