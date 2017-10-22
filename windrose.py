@@ -6,12 +6,15 @@ Pie chart on polar axis
 Demo of bar plot on a polar axis.
 """
 from __future__ import division
+import matplotlib
+matplotlib.use('Qt4Agg')
+
 import numpy as np
 import matplotlib.pyplot as plt
 from getWeatherData import returnWeatherDataDict
 
 
-windData = returnWeatherDataDict(locationString="Athens Greece")#,longitude=-73.97,latitude=40.78)
+windData = returnWeatherDataDict(locationString="Dallas Texas")#,longitude=-73.97,latitude=40.78)
 windSpeed = windData["windSpeed"]
 windDirection = windData["windDirection"]
 
@@ -26,14 +29,16 @@ def Angles():
     angles.append(360)
     return angles
 
+angleList = Angles()
+
 maxWind = int(max(windSpeed))
 
-def Legend():
+def legendList():
     legend = []
     for i in range(0,maxWind*100,int((maxWind*100)/10)):
         legend.append(i/100)
     return legend
-
+legendList = legendList()
 
 # def wind_data(dir):
 #     wind_byDir = []
@@ -56,26 +61,26 @@ def wind_data(dir):
     wind_10 = []
     for f in range(8760):
         if windSpeed[f] != 0:
-            if windDirection[f] >= Angles()[dir] and windDirection[f] < Angles()[dir+1]:
-                if windSpeed[f] >= Legend()[0] and windSpeed[f] < Legend()[1]:
+            if windDirection[f] >= angleList[dir] and windDirection[f] < angleList[dir+1]:
+                if windSpeed[f] >= legendList[0] and windSpeed[f] < legendList[1]:
                     wind_1.append(windSpeed[f])
-                elif windSpeed[f] >= Legend()[1] and windSpeed[f] < Legend()[2]:
+                elif windSpeed[f] >= legendList[1] and windSpeed[f] < legendList[2]:
                     wind_2.append(windSpeed[f])
-                elif windSpeed[f] >= Legend()[2] and windSpeed[f] < Legend()[3]:
+                elif windSpeed[f] >= legendList[2] and windSpeed[f] < legendList[3]:
                     wind_3.append(windSpeed[f])
-                elif windSpeed[f] >= Legend()[3] and windSpeed[f] < Legend()[4]:
+                elif windSpeed[f] >= legendList[3] and windSpeed[f] < legendList[4]:
                     wind_4.append(windSpeed[f])
-                elif windSpeed[f] >= Legend()[4] and windSpeed[f] < Legend()[5]:
+                elif windSpeed[f] >= legendList[4] and windSpeed[f] < legendList[5]:
                     wind_5.append(windSpeed[f])
-                elif windSpeed[f] >= Legend()[5] and windSpeed[f] < Legend()[6]:
+                elif windSpeed[f] >= legendList[5] and windSpeed[f] < legendList[6]:
                     wind_6.append(windSpeed[f])
-                elif windSpeed[f] >= Legend()[6] and windSpeed[f] < Legend()[7]:
+                elif windSpeed[f] >= legendList[6] and windSpeed[f] < legendList[7]:
                     wind_7.append(windSpeed[f])
-                elif windSpeed[f] >= Legend()[7] and windSpeed[f] < Legend()[8]:
+                elif windSpeed[f] >= legendList[7] and windSpeed[f] < legendList[8]:
                     wind_8.append(windSpeed[f])
-                elif windSpeed[f] >= Legend()[8] and windSpeed[f] < Legend()[9]:
+                elif windSpeed[f] >= legendList[8] and windSpeed[f] < legendList[9]:
                     wind_9.append(windSpeed[f])
-                elif windSpeed[f] >= Legend()[9]:
+                elif windSpeed[f] >= legendList[9]:
                     wind_10.append(windSpeed[f])
     return wind_1,wind_2,wind_3,wind_4,wind_5,wind_6,wind_7,wind_8,wind_9,wind_10
 
@@ -131,9 +136,12 @@ plt.xticks(np.radians(range(0, 360, 45)),
 #plt.rgrids(range(1, int(np.amax(radii0)*1.2), int(np.ceil(np.amax(radii0)/5))), angle=290)
 
 # Use custom colors and opacity
-for r, bar in zip(radii0, bars0):
-    bar.set_facecolor(plt.cm.jet(r / 10.))
-    bar.set_alpha(0.5)
+
+
+# for r, bar in zip(radii0, bars0):
+#     bar.set_facecolor(plt.cm.plasma(r / 10.))
+#     bar.set_alpha(0.5)
+
 
 plt.show()
 # plt.savefig("plot.svg")
