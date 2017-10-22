@@ -14,7 +14,7 @@ import os
 
 
 # Import Ladybug
-rootDir = os.getcwd() + '\\vizzz\\assets\\'
+rootDir = os.getcwd() + '/vizzz/assets/'
 print rootDir
 import sys
 sys.path.append(rootDir)
