@@ -177,7 +177,7 @@ def returnWindRose(weatherDataDict,divisions=None,filepath='windrose.png'):
 
 
     fig = matplotlib.pyplot.gcf()
-    fig.set_size_inches(8,5)
+    fig.set_size_inches(8,6)
     fig.savefig(filepath)
     fig.clf()
     return filepath
@@ -195,7 +195,7 @@ def returnHeatMap(weatherDataDict,filepath,dataType,dataLabel,colormap='plasma')
             counter+=1
         valList.append(newList)
     y = np.transpose(valList)
-    plt.imshow(y, interpolation = "nearest", aspect = 4, cmap = colormap)
+    plt.imshow(y, interpolation = "nearest", aspect = 5.5, cmap = colormap)
     plt.colorbar(orientation='horizontal')
     plt.title(dataLabel)
     plt.xlabel('Days')

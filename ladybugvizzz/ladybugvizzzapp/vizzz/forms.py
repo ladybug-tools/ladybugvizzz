@@ -25,7 +25,18 @@ legColors = (
         ('Greens', 'Greens'),
         ('Oranges', 'Oranges'),
         ('Reds', 'Reds'),
-        ('YlOrBr', 'Yellow Brown'),)
+        ('YlOrBr', 'YellowOrangeBrown'),
+        ('YlOrRd', 'OrangeRed'),
+        ('PuRd', 'PurpleRed'),
+        ('RdPu', 'Red Purple'),
+        ('BuPu', 'BluePurple'),
+        ('GnBu', 'GreenBlue'),
+        ('PuBu', 'PurplBlue'),
+        ('YlGnBu', 'YellowGreenBlue'),
+        ('PuBuGn', 'PurpleBlueGreen'),
+        ('BuGn', 'BlueGreen'),
+        ('YlGn', 'YellowGreen'),)
+
 
 class DatTyp(models.Model):
     datTyp = models.CharField(max_length=25,choices=datTyps)

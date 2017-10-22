@@ -44,7 +44,7 @@ class HomePageView(TemplateView):
     def get(self, request, **kwargs):
         print "Empty form"
         form = CityForm()
-        return render(request, 'index.html', {'form': form})
+        return render(request, 'index.html', {'form': form, 'logo' : '\\static\\logo.png'})
 
     @csrf_exempt
     def post(self, request, **kwargs):
@@ -58,12 +58,15 @@ class HomePageView(TemplateView):
         windRelpath = '\\static\\windrose.png'
         heatMapPath = os.getcwd() + '\\vizzz\\static\\heatmap.png'
         heatRelpath = '\\static\\heatmap.png'
+        mapPath = os.getcwd() + '\\vizzz\\static\\googleMap.html'
+        mapRelpath = '\\static\\googleMap.html'
 
         if currentCity != cityname:
-            y = getWeatherPlots.returnWeatherDataDict(locationString="Dallas Texas USA", plotGoogleMapPath='googleMap.html')
+            y = getWeatherPlots.returnWeatherDataDict(cityname, plotGoogleMapPath=mapPath)
             z = getWeatherPlots.returnWindRose(y,divisions=None,filepath=windRosePath)
         a = getWeatherPlots.returnHeatMap(y,filepath=heatMapPath,dataType=dataType,dataLabel=dataDict[dataType][0], colormap=legColor)
 
+        locStr = y['location'] + ', ' + y['country'] + ', Lat: ' + str(y['latitude']) + ' , Long: '+ str(y['longitude'])
 
         #cityPicUrl = getWeatherData.returnWeatherDataDict(cityname)
-        return render(request, 'index.html', {'form': form, 'windPicUrl': windRelpath, 'heatPicUrl': heatRelpath})
+        return render(request, 'index.html', {'form': form, 'logo' : '\\static\\logo.png', 'windPicUrl': windRelpath, 'heatPicUrl': heatRelpath, 'location': locStr, 'mapHTML' : mapRelpath})

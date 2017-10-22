@@ -67,6 +67,11 @@ def returnWeatherDataDict(locationString=None,longitude=None,latitude=None,downl
 
     # Get weather data
     weatherDataDict = extractEPWdataset(climData,fileDownloadDirectory=downloadDirectory)
+    weatherDataDict['location'] = climData.location
+    weatherDataDict['country'] = climData.country
+    weatherDataDict['longitude']=climData.longitude
+    weatherDataDict['latitude']=climData.latitude
+    weatherDataDict['id']=climData.id
 
     #If a path is provided, then write a google map too!
     if plotGoogleMapPath:
@@ -107,11 +112,3 @@ def returnWeatherDataDict(locationString=None,longitude=None,latitude=None,downl
         gmap.draw(plotGoogleMapPath)
 
     return weatherDataDict
-if __name__ == "__main__":
-    from utilities.randomCity import returnRandomCity
-    # y= returnWeatherDataDict(latitude=32.77,longitude=-96.79,plotGoogleMapPath=True)
-    # print(y['windSpeed'])
-
-    y=returnWeatherDataDict(locationString="Dallas Texas USA",plotGoogleMapPath='googleMap.html')
-    print(y['windSpeed'])
-    print(y['windDirection'])
