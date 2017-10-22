@@ -184,6 +184,7 @@ def returnWindRose(filepath, locationString=None, divisions=None, Longitude=None
     #     bar.set_alpha(0.5)
 
 
+
     fig = matplotlib.pyplot.gcf()
     fig.set_size_inches(8,5)
     fig.savefig(filepath, dpi=300)
