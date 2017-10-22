@@ -1,7 +1,9 @@
 
 from __future__ import division
-import matplotlib.pyplot as plt
+
 import matplotlib
+matplotlib.use('Qt4Agg')
+import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.pyplot as plt
 from getWeatherData import returnWeatherDataDict
@@ -181,7 +183,7 @@ def returnWindRose(weatherDataDict,divisions=None,filepath='windrose.png'):
     fig = matplotlib.pyplot.gcf()
     fig.set_size_inches(8,5)
     fig.savefig(filepath, dpi=300)
-    fig.clf()
+    plt.clf()
     return filepath
 
 def returnHeatMap(weatherDataDict,dataType,dataLabel,colormap='plasma',filepathExtension='png',
@@ -206,7 +208,7 @@ def returnHeatMap(weatherDataDict,dataType,dataLabel,colormap='plasma',filepathE
     plt.ylabel('Hours')
     plt.savefig("%s"%filepath)
     plt.clf()
-
+    return "%s"%filepath
 def returnSunPath(weatherDataDict,colormap='plasma',filepath='sunpath.png',backgroundPath='background.png'):
     longitude, latitude, meridian = weatherDataDict['longitude'],weatherDataDict['latitude'],weatherDataDict['meridian']
 
@@ -428,14 +430,15 @@ def returnSunPath(weatherDataDict,colormap='plasma',filepath='sunpath.png',backg
     bx.axes.get_yaxis().set_visible(False)
 
     # general properties for the image saving
+
     fig.set_size_inches(8, 8)
     fig.savefig(filepath, dpi=300, transparent=True)
     figB.set_size_inches(8, 8)
     figB.savefig(backgroundPath, dpi=300)
-
+    plt.clf()
 
 if __name__ == "__main__":
-    y = returnWeatherDataDict(locationString="Dallas Texas USA", plotGoogleMapPath='googleMap.html')
+    y = returnWeatherDataDict(locationString="Boston USA", plotGoogleMapPath='googleMap.html')
     z = returnWindRose(y)
     a = returnHeatMap(y,dataType="diffuseHorizontalRadiation",dataLabel="Diffuse Horizontal Radiation",
                       colormap='plasma')
