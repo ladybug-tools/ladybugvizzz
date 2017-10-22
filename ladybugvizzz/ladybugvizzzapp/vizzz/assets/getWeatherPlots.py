@@ -1,18 +1,12 @@
-"""
-LadybugVizz | Wind rose chart
-"""
-
 
 from __future__ import division
 import matplotlib
-#matplotlib.use('Qt4Agg')
 
 import numpy as np
 import matplotlib.pyplot as plt
 from getWeatherData import returnWeatherDataDict
 
-
-def returnWindRose(imgPath, locationString=None, divisions=None, Longitude=None, Latitude=None):
+def returnWindRose(weatherDataDict,divisions=None,filepath='windrose.png'):
     """
 
     :param filepath: file path to save (required)
@@ -23,13 +17,11 @@ def returnWindRose(imgPath, locationString=None, divisions=None, Longitude=None,
     :return:
     """
 
-    assert locationString or ((Longitude is not None) and (Latitude is not None)), "either locationString or Longitude and Latitude are required."
+
 
     # call getWeatherData and get wind-speed and direction
-    windData = returnWeatherDataDict(locationString=locationString,longitude=Longitude,latitude=Latitude)
-    windSpeed = windData["windSpeed"]
-    windDirection = windData["windDirection"]
-
+    windSpeed = weatherDataDict["windSpeed"]
+    windDirection = weatherDataDict["windDirection"]
     # define Calm (0 m/s) to filter it out later, and max-speed to create legend
     Calm = windSpeed.count(0)
     maxWind = int(max(windSpeed))
@@ -183,10 +175,33 @@ def returnWindRose(imgPath, locationString=None, divisions=None, Longitude=None,
     #     bar.set_alpha(0.5)
 
 
+
     fig = matplotlib.pyplot.gcf()
     fig.set_size_inches(8,5)
-    #plt.draw()
-    #plt.savefig('\\static\\windrose.png')
-    fig.savefig(imgPath)
-    plt.clf()
-    return True
+    fig.savefig(filepath)
+    fig.clf()
+    return filepath
+
+def returnHeatMap(weatherDataDict,filepath,dataType,dataLabel,colormap='plasma'):
+
+    dataSet= tuple(float(i) for i in weatherDataDict[dataType])
+
+    valList = []
+    counter = 0
+    for hour in range(365):
+        newList = []
+        for date in range(24):
+            newList.append(dataSet[counter])
+            counter+=1
+        valList.append(newList)
+    y = np.transpose(valList)
+    plt.imshow(y, interpolation = "nearest", aspect = 4, cmap = colormap)
+    plt.colorbar(orientation='horizontal')
+    plt.title(dataLabel)
+    plt.xlabel('Days')
+    plt.ylabel('Hours')
+    fig = matplotlib.pyplot.gcf()
+    fig.set_size_inches(8,4)
+    fig.savefig(filepath)
+    fig.clf()
+    return filepath

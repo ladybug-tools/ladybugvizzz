@@ -4,8 +4,6 @@ matplotlib.use("Qt4Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from utilities.colors import colorList
-from utilities import colors
 
 """
     At present the following outputs are supported: dryBulbTemperature, dewPointTemperature, relativeHumidity, windSpeed,
