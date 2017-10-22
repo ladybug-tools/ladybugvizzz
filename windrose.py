@@ -187,8 +187,9 @@ def returnWindRose(filepath, locationString=None, divisions=None, Longitude=None
     fig = matplotlib.pyplot.gcf()
     fig.set_size_inches(8,5)
     fig.savefig(filepath, dpi=300)
+    fig.show()
     #fig.savefig("windRose.svg")
     return filepath
 
 if __name__ == "__main__":
-    windRose = returnWindRose(filepath="windrose.png",locationString="New York")
+    windRose = returnWindRose(filepath="windrose.png",locationString="Wellington New Zealand",divisions=16)
