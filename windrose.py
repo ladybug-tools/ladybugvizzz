@@ -13,7 +13,7 @@ from getWeatherData import returnWeatherDataDict
 
 
 # call getWeatherData and get wind-speed and direction
-windData = returnWeatherDataDict(locationString="New York")#,longitude=-73.97,latitude=40.78)
+windData = returnWeatherDataDict(locationString="South Pole")#,longitude=-73.97,latitude=40.78)
 windSpeed = windData["windSpeed"]
 windDirection = windData["windDirection"]
 
@@ -24,7 +24,7 @@ maxWind = int(max(windSpeed))
 
 
 # define radial divisions for chart
-Divisions = 16
+Divisions = 8
 
 
 # define the angle division according to the divisions
@@ -166,7 +166,8 @@ plt.title("Wind Rose")
 #     bar.set_alpha(0.5)
 
 
-plt.show()
-plt.savefig("plot.svg")
-# plt.savefig("plot.png")
-# plt.savefig("plot.pdf")
+fig = matplotlib.pyplot.gcf()
+fig.set_size_inches(8,5)
+fig.savefig("windRose.png", dpi=300)
+fig.savefig("windRose.svg")
+
