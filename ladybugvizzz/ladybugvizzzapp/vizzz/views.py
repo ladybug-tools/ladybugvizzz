@@ -2,8 +2,11 @@
 from __future__ import unicode_literals
 
 # Import Django libraries
-from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.generic import TemplateView
+from django.views.decorators.csrf import csrf_exempt
+from .forms import CityForm
 
 # Import python modules
 import random
@@ -11,36 +14,25 @@ import os
 
 
 # Import Ladybug
-
-rootDir = os.getcwd()
+rootDir = os.getcwd() + '\\vizzz\\assets\\'
+print rootDir
 import sys
-sys.path.append(os.path.join(rootDir,'vizzz','assets'))
+sys.path.append(rootDir)
 import ladybug
 import getWeatherData
-import __locateEPW
-import locationCalc
-import __extractEPW
+
 
 # Create your views here.
-def index(request):
-    """"
-    Return a random city from the list of cities in the csv file at __epwLocations/largeCities.csv
-    :param beginsWith: Filter cities starting with these letters.
-    :param endsWith:  Filter cities ending with these letters.
-    :return:
-    """
-    cityList = []
-    rootDir = os.getcwd()
-    file_path = rootDir + '\\vizzz\\assets\__epwLocations\largeCities.csv'
-    with open(file_path, 'r') as cityData:
-        for lines in cityData:
-            if lines.strip():
-                cityList.append(lines.strip())
+class HomePageView(TemplateView):
+    def get(self, request, **kwargs):
+        print "Empty form"
+        form = CityForm()
+        return render(request, 'index.html', {'form': form})
 
-    randomCity = str(random.choice(cityList))
-    cityData = getWeatherData.returnWeatherDataDict(randomCity)
-
-    city = '<h1>' + randomCity + "</h1>"
-    city = city + str(cityData)
-
-    return HttpResponse(city)
+    @csrf_exempt
+    def post(self, request, **kwargs):
+        cityname = request.POST.get("city_name", default="New York")
+        print "Submitted city: " + cityname
+        form = CityForm(request.POST)
+        cityPicUrl = getWeatherData.returnWeatherDataDict(cityname)
+        return render(request, 'index.html', {'form': form, 'cityPicUrl': cityPicUrl})
