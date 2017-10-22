@@ -19,9 +19,25 @@ print rootDir
 import sys
 sys.path.append(rootDir)
 import ladybug
+import utilities
 import getWeatherData
-import __windrose
+import getWeatherPlots
 
+# Variable to track city.
+currentCity = "None"
+
+# Dictonary of full data types.
+dataDict = {"diffuseHorizontalRadiation": ("Diffuse Horizontal Radiation", 'inferno'),
+            'dryBulbTemperature': ("Dry Bulb Temperature", 'magma'),
+            'relativeHumidity': ("Relative Humidity", 'Blues'),
+            'windSpeed': ("Wind Speed", 'Blues'),
+            'globalHorizontalRadiation': ("Global Horizontal Radiation", 'Greens'),
+            'directNormalRadiation': ("Direct Normal Radiation", 'inferno'),
+            'diffuseHorizontalRadiation': ("Diffuse Horizontal Radiation", 'plasma'),
+            'horizontalInfraredRadiationIntensity': ("Horizontal Infrared Radiation Intensity", 'plasma'),
+            'globalHorizontalIlluminance': ("Global Horizontal Illuminance", 'plasma'),
+            'directNormalIlluminance': ("Direct Normal Illuminance", 'Reds'),
+            'diffuseHorizontalIlluminance': ("Diffuse Horizontal Illuminance", 'plasma')}
 
 # Create your views here.
 class HomePageView(TemplateView):
@@ -33,10 +49,21 @@ class HomePageView(TemplateView):
     @csrf_exempt
     def post(self, request, **kwargs):
         cityname = request.POST.get("city_name", default="New York")
+        dataType = request.POST.get("data_type", default="dryBulbTemperature")
+        legColor = request.POST.get("color", default="plasma")
         print "Submitted city: " + cityname
         form = CityForm(request.POST)
-        imgPath = os.getcwd() + '\\vizzz\\static\\windrose.png'
-        windRose = __windrose.returnWindRose(imgPath, cityname)
-        relpath = '\\static\\windrose.png'
+
+        windRosePath = os.getcwd() + '\\vizzz\\static\\windrose.png'
+        windRelpath = '\\static\\windrose.png'
+        heatMapPath = os.getcwd() + '\\vizzz\\static\\heatmap.png'
+        heatRelpath = '\\static\\heatmap.png'
+
+        if currentCity != cityname:
+            y = getWeatherPlots.returnWeatherDataDict(locationString="Dallas Texas USA", plotGoogleMapPath='googleMap.html')
+            z = getWeatherPlots.returnWindRose(y,divisions=None,filepath=windRosePath)
+        a = getWeatherPlots.returnHeatMap(y,filepath=heatMapPath,dataType=dataType,dataLabel=dataDict[dataType][0], colormap=legColor)
+
+
         #cityPicUrl = getWeatherData.returnWeatherDataDict(cityname)
-        return render(request, 'index.html', {'form': form, 'cityPicUrl': relpath})
+        return render(request, 'index.html', {'form': form, 'windPicUrl': windRelpath, 'heatPicUrl': heatRelpath})
