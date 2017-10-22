@@ -4,10 +4,11 @@ This module contains a function for returning a dictionary for weather data list
 """
 from __locateEPW import locateEPW
 from __extractEPW import extractEPWdataset
-
+import gmplot
+from geopy.geocoders import Nominatim
 def returnWeatherDataDict(locationString=None,longitude=None,latitude=None,downloadDirectory=None,
                           searchRadius=50, searchMultiplier=5, recursionLimit=5,
-                          numberOfResults=10,searchDataSelection=0 ):
+                          numberOfResults=10,searchDataSelection=0,plotGoogleMapPath=None ):
     """
     Return a dictionary containing weather data lists of 8760 each based on search parameters. The search parameters
     can be a generic address specified through locationString or longitude and latitude values. Either of those options
@@ -67,11 +68,50 @@ def returnWeatherDataDict(locationString=None,longitude=None,latitude=None,downl
     # Get weather data
     weatherDataDict = extractEPWdataset(climData,fileDownloadDirectory=downloadDirectory)
 
+    #If a path is provided, then write a google map too!
+    if plotGoogleMapPath:
+        if locationString:
+            geolocator = Nominatim()
+            location = geolocator.geocode(locationString,timeout=10)
+            try:
+                latitude,longitude=location.latitude,location.longitude
+            except AttributeError:
+                raise Exception("No geographical locations were identified for %s. A more specific search"
+                                " with zipcodes and similar identifying information will be more helpful."%locationString)
+        # for val in x:
+
+
+        lats =[]
+        longs =[]
+        distances = []
+        for val in x:
+            lats.append(val.climateDataClass.latitude)
+            longs.append(val.climateDataClass.longitude)
+            distances.append(val.distance)
+
+        distanceDict = ((300,9),(600,7),(900,5))
+
+        minDistance = min(distances)
+
+        scaling=None
+        for dist,scale in distanceDict:
+            if minDistance < dist:
+                scaling=scale
+                break
+        if not scaling:
+            scaling=5
+
+        gmap = gmplot.GoogleMapPlotter(latitude, longitude, scaling)
+        gmap.circle(latitude,longitude,3000,'black')
+        gmap.heatmap(lats, longs,opacity=1)
+        gmap.draw(plotGoogleMapPath)
+
     return weatherDataDict
 if __name__ == "__main__":
+    from utilities.randomCity import returnRandomCity
+    # y= returnWeatherDataDict(latitude=32.77,longitude=-96.79,plotGoogleMapPath=True)
+    # print(y['windSpeed'])
 
-    y= returnWeatherDataDict(latitude=32.77,longitude=-96.79)
+    y=returnWeatherDataDict(locationString="Dallas Texas USA",plotGoogleMapPath='googleMap.html')
     print(y['windSpeed'])
-
-    y=returnWeatherDataDict(locationString='North Pole')
-    print(y['windSpeed'])
+    print(y['windDirection'])
