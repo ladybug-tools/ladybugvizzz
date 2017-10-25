@@ -85,7 +85,7 @@
        <string>Visualize !</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblLocation_2">
+     <widget class="QLabel" name="lblGoogleMap">
       <property name="geometry">
        <rect>
         <x>300</x>
@@ -174,7 +174,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="lblCharts_2">
+     <widget class="QLabel" name="lblSelectedEPWDetails">
       <property name="geometry">
        <rect>
         <x>530</x>
@@ -198,19 +198,6 @@
       </property>
       <property name="text">
        <string>Confirm Weather Data File</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lblWeatherDataYearPlot">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>20</y>
-        <width>581</width>
-        <height>131</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
       </property>
      </widget>
      <widget class="QGroupBox" name="grpSearchWeather">
@@ -356,7 +343,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QLabel" name="lblEPWlocations_2">
+      <widget class="QLabel" name="lblSelectedLocationDetails">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -380,25 +367,23 @@
        </property>
       </widget>
      </widget>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>0</y>
+        <width>591</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="layoutEPWyears"/>
+     </widget>
     </widget>
     <widget class="QWidget" name="tbChart">
      <attribute name="title">
       <string>Charts</string>
      </attribute>
-     <widget class="QLabel" name="lblCharts">
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>10</y>
-        <width>901</width>
-        <height>641</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="cmbPlotType">
+     <widget class="QComboBox" name="cmbChartType">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -408,7 +393,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QComboBox" name="cmbColorScheme">
+     <widget class="QComboBox" name="cmbChartColorScheme">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -418,7 +403,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="lblPlotType">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -431,7 +416,7 @@
        <string>Plot Type</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="lblColorScheme">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -444,7 +429,7 @@
        <string>Color Scheme</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="lblFont">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -457,7 +442,7 @@
        <string>Font</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="cmbColorScheme_2">
+     <widget class="QComboBox" name="cmbChartFont">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -467,7 +452,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QComboBox" name="cmbColorScheme_3">
+     <widget class="QComboBox" name="cmbChartAspectRatio">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -477,7 +462,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label_5">
+     <widget class="QLabel" name="lblChartAspectRatio">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -490,40 +475,139 @@
        <string>Chart Aspect Ratio</string>
       </property>
      </widget>
+     <widget class="QLineEdit" name="linEditChartMinValue">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>230</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="linEditChartMaxValue">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>230</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>0</y>
+        <width>901</width>
+        <height>681</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="layoutCharts"/>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>210</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>210</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Min</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tbWindRose">
      <attribute name="title">
       <string>Wind Rose</string>
      </attribute>
-     <widget class="QLabel" name="lblWindrose">
+     <widget class="QWidget" name="verticalLayoutWidget_3">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>60</y>
-        <width>951</width>
-        <height>591</height>
+        <x>170</x>
+        <y>0</y>
+        <width>941</width>
+        <height>681</height>
        </rect>
       </property>
-      <property name="text">
-       <string/>
-      </property>
+      <layout class="QVBoxLayout" name="layoutWindrose"/>
      </widget>
     </widget>
     <widget class="QWidget" name="tbSunPath">
      <attribute name="title">
       <string>SunPath</string>
      </attribute>
-     <widget class="QLabel" name="labelSunpath">
+     <widget class="QWidget" name="verticalLayoutWidget_4">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>711</width>
-        <height>641</height>
+        <x>210</x>
+        <y>10</y>
+        <width>901</width>
+        <height>671</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="layoutSunpath"/>
+     </widget>
+     <widget class="QComboBox" name="cmbSunPlotType">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>20</y>
+        <width>201</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cmbSunPathColorScheme">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>70</y>
+        <width>201</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblColorScheme_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>50</y>
+        <width>91</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string/>
+       <string>Color Scheme</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblSunColor">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>151</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>DataSet for Coloring Suns</string>
       </property>
      </widget>
     </widget>
