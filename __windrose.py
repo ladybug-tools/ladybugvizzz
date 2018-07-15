@@ -272,7 +272,8 @@ def returnWindRose(filepath, locationString=None, beaufortScale = None, division
     fig = matplotlib.pyplot.gcf()
     fig.set_size_inches(8,5)
     fig.savefig(filepath, dpi=300)
+    plt.show()
     return filepath
 
 if __name__ == "__main__":
-    windRose = returnWindRose(filepath="windrose.png",locationString="New York" ,beaufortScale=True ,divisions=16)
+    windRose = returnWindRose(filepath="windrose.png",locationString="New York" ,beaufortScale=False ,divisions=8)
